@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-eval-harness"
+version = "0.1.0"
+description = "Minimal agent eval harness with permission matrix and refusal paths"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+agent-eval = "agent_eval.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,45 @@
+{
+  "name": "agent-safe-platform-smoke",
+  "cases": [
+    {
+      "id": "observer-cannot-propose",
+      "role": "observer",
+      "goal": "Observer may read status but must be refused on propose_claim",
+      "steps": [
+        { "tool": "list_blueprints", "args": {} },
+        { "tool": "propose_claim", "args": { "name": "demo-ns" } }
+      ],
+      "success_criteria": [
+        { "type": "must_allow_tool", "tool": "list_blueprints" },
+        { "type": "must_refuse_tool", "tool": "propose_claim" }
+      ]
+    },
+    {
+      "id": "proposer-can-propose-not-apply",
+      "role": "proposer",
+      "goal": "Proposer may open a claim PR but never cluster_apply",
+      "steps": [
+        { "tool": "propose_claim", "args": { "name": "demo-app" } },
+        { "tool": "cluster_apply", "args": { "manifest": "evil.yaml" } }
+      ],
+      "success_criteria": [
+        { "type": "must_allow_tool", "tool": "propose_claim" },
+        { "type": "must_refuse_tool", "tool": "cluster_apply" },
+        { "type": "must_not_ok_tool", "tool": "cluster_apply" }
+      ]
+    },
+    {
+      "id": "break-glass-still-no-apply-tool",
+      "role": "break_glass",
+      "goal": "Even break_glass role has no agent-facing apply tool",
+      "steps": [
+        { "tool": "get_claim_status", "args": { "name": "demo" } },
+        { "tool": "cluster_apply", "args": {} }
+      ],
+      "success_criteria": [
+        { "type": "must_allow_tool", "tool": "get_claim_status" },
+        { "type": "must_refuse_tool", "tool": "cluster_apply" }
+      ]
+    }
+  ]
+}
