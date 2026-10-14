@@ -32,6 +32,7 @@ Each case study includes: context diagram, ADRs, threat-model excerpt, and “wh
 ## Proof pack & focus
 
 - [Interview proof pack](./proof/PROOF_PACK.md) — roles, demos, talk targets
+- [GitHub profile setup](./proof/GITHUB_PROFILE_SETUP.md) — bio + pin checklist
 - [90-day focus rule](./FOCUS_90_DAYS.md) — no net-new domains; finish and narrate the trilogy
 
 ## Related public work
